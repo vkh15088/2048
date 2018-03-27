@@ -83,16 +83,7 @@ public class demo2048 {
         this.currentscore = currentscore;
     }
 
-    public void display() {
-        for (int x = 0; x < MAXCELL; x++) {
-            for (int y = 0; y < MAXCELL; y++) {
-                System.out.print(board[x][y] + "  ");
-            }
-            System.out.println();
-        }
-        System.out.println("hightscore:" + hightscore + "\ncurrentscore :" + currentscore);
-        System.out.println();
-    }
+   
 
     public void addnewcell() {
     }
