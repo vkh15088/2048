@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package frame;
-
+package game_project;
 
 import java.util.*;
 import java.io.*;
 
 public class HighscoreManager {
-
     // An arraylist of the type "score" we will use to work with the scores inside the class
     private ArrayList<Score> scores;
 
@@ -23,36 +16,32 @@ public class HighscoreManager {
 
     public HighscoreManager() {
         //initialising the scores-arraylist
-        scores = new ArrayList<>();
+        scores = new ArrayList<Score>();
     }
-
     public ArrayList<Score> getScores() {
         loadScoreFile();
         sort();
         return scores;
     }
-
     private void sort() {
         ScoreComparator comparator = new ScoreComparator();
         Collections.sort(scores, comparator);
-    }
-
+}
     public void addScore(String name, int score) {
         loadScoreFile();
         scores.add(new Score(name, score));
         updateScoreFile();
-    }
-
+}
     public void loadScoreFile() {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
             scores = (ArrayList<Score>) inputStream.readObject();
         } catch (FileNotFoundException e) {
-            System.out.println("[Load] FNF Error: " + e.getMessage());
+            System.out.println("[Laad] FNF Error: " + e.getMessage());
         } catch (IOException e) {
-            System.out.println("[Load] IO Error: " + e.getMessage());
+            System.out.println("[Laad] IO Error: " + e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("[Load] CNF Error: " + e.getMessage());
+            System.out.println("[Laad] CNF Error: " + e.getMessage());
         } finally {
             try {
                 if (outputStream != null) {
@@ -60,11 +49,10 @@ public class HighscoreManager {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                System.out.println("[Load] IO Error: " + e.getMessage());
+                System.out.println("[Laad] IO Error: " + e.getMessage());
             }
         }
-    }
-
+}
     public void updateScoreFile() {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(HIGHSCORE_FILE));
@@ -83,11 +71,10 @@ public class HighscoreManager {
                 System.out.println("[Update] Error: " + e.getMessage());
             }
         }
-    }
-
-    public String getHighscoreString() {
+}
+public String getHighscoreString() {
         String highscoreString = "";
-        final int max = 10;
+	final int max = 10;
 
         ArrayList<Score> scores;
         scores = getScores();
@@ -102,12 +89,11 @@ public class HighscoreManager {
             i++;
         }
         return highscoreString;
-    }
-
-    public int getHighScore() {
+}
+public int getHighScore()
+{
         ArrayList<Score> scores;
         scores = getScores();
         return scores.get(0).getScore();
-    }
 }
-
+}
